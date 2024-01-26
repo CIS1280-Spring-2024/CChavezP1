@@ -75,8 +75,9 @@ namespace CChavezP1
         //“molecularWeights" is an array of molecular weights. This array is parallel to the gasNames array.
         //"countGases" is the count of elements in gasNames and molecularWeights arrays.
         {
-            for (int i = 0; i < gasNames.Length; i++)
+            for (int i = 0; i < countGases; i++)
             {
+
                 if (gasNames[i] == gasName)
                 {
                     return molecularWeights[i];
@@ -85,8 +86,8 @@ namespace CChavezP1
                 {
                     Console.WriteLine($"The gas you entered was not on the list.");
                     break;
-                    //return 0;
                 }
+                
             }
         }
         static double Pressure(double mass, double vol, double temp, double molecularWeight)
