@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic;
+using Microsoft.VisualBasic;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Diagnostics.Metrics;
 using System.Reflection.Metadata;
