@@ -69,7 +69,7 @@ namespace CChavezP1
             }
 
         }
-        private static double GetMolecularWeightFromName(string gasName, string[] gasNames, double[] molecularWeights, int countGases) //TODO: countGasses should be an out or ref variable. RJG
+        private static double GetMolecularWeightFromName(string gasName, string[] gasNames, double[] molecularWeights, int countGases) //TODO: countGasses should be an out or ref variable. RJG    
 
         //This function looks up the name of a gas in an array of gas names then returns the molecular weight of that gas in mols
         //“gasName” is the name of gas to search for as a string.
