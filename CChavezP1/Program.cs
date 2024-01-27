@@ -64,11 +64,13 @@ namespace CChavezP1
             for (int i = 0; i < gasNames.Length; i++)
             {
                 // DONT submit this needs to be formated
-                Console.WriteLine(gasNames[i]);
+                //TODO: You need to format the output so that it is in three columns. Consider maybe use write instead of writeline and then check if i % 3 == 0 and only then do a writeline RJG
+                Console.WriteLine(gasNames[i]); 
             }
 
         }
-        private static double GetMolecularWeightFromName(string gasName, string[] gasNames, double[] molecularWeights, int countGases)
+        private static double GetMolecularWeightFromName(string gasName, string[] gasNames, double[] molecularWeights, int countGases) //TODO: countGasses should be an out or ref variable. RJG
+
         //This function looks up the name of a gas in an array of gas names then returns the molecular weight of that gas in mols
         //“gasName” is the name of gas to search for as a string.
         //“gasNames" is an array of gas names
@@ -86,9 +88,12 @@ namespace CChavezP1
                 {
                     Console.WriteLine($"The gas you entered was not on the list.");
                     break;
+                    
+                    
                 }
                 
             }
+            //TODO: Because this method is a double it needs to return something. You could return 0 or -1 to indicate an error. RJG
         }
         static double Pressure(double mass, double vol, double temp, double molecularWeight)
         //  Given mass, volume, temperature and molecular weight returns pressure of a gas in pascals.
@@ -180,10 +185,12 @@ namespace CChavezP1
 
                 //Use GetMolecularWeightFromName method to get the molecular weight of the gas
                 //selected by the user.
-                GetMolecularWeightFromName(gasName, gasNames, molecularWeights, countGases);
+                GetMolecularWeightFromName(gasName, gasNames, molecularWeights, countGases); //TODO: countGasses should be an out or ref variable. RJG
                 //If the gas is not found display an error message, and drop out to the do another loop.
                 //Ask the user for the volume of gas in cubic meters, mass of the gas in grams and temperature in celcius.
                 Console.WriteLine($"What volume of gas are you calulating?\n");
+                //TODO: You need to tell the user what units you are expecting. RJG
+
                 string volBuffer = Console.ReadLine();
                 vol = double.Parse(volBuffer);
                 //Use the Pressure method to get the pressure of the gas in Pascals.
