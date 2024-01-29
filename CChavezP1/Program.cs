@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic;
+using Microsoft.VisualBasic;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Diagnostics.Metrics;
 using System.Reflection.Metadata;
@@ -66,31 +66,14 @@ namespace CChavezP1
             Console.WriteLine("---------------------AVAILABLE GASSES---------------------");
             for (int i = 0; i < gasNames.Length; i++)
             {
-                if (outputCount == 0)
-                {
-
-                    Console.Write("{0,-20}", gasNames[i]);
-                    countGases++;
-                    outputCount++;
-                }
-                else if (outputCount == 1)
-                {
-                    Console.Write("{0,-20}", gasNames[i]);
-                    countGases++;
-                    outputCount++;
-
-                }
-                else
-                {
-                    Console.Write("{0,-20} \n", gasNames[i]);
-                    countGases++;
-                    outputCount = 0;
-                }
-               
+                // DONT submit this needs to be formated
+                //TODO: You need to format the output so that it is in three columns. Consider maybe use write instead of writeline and then check if i % 3 == 0 and only then do a writeline RJG
+                Console.WriteLine(gasNames[i]); 
             }
-            Console.WriteLine("\n----------------------------------------------------\n");
+
         }
-        private static double GetMolecularWeightFromName(string gasName, string[] gasNames, double[] molecularWeights, out int countGases) //  DONE: countGasses should be an out or ref variable. RJG    
+        private static double GetMolecularWeightFromName(string gasName, string[] gasNames, double[] molecularWeights, int countGases) //TODO: countGasses should be an out or ref variable. RJG    
+
         //This function looks up the name of a gas in an array of gas names then returns the molecular weight of that gas in mols
         //“gasName” is the name of gas to search for as a string.
         //“gasNames" is an array of gas names
@@ -108,11 +91,12 @@ namespace CChavezP1
                 else 
                 {
                     Console.WriteLine($"The gas you entered was not on the list.");
-                    return 0;
+                    break;
                 }
               //TODO: Because this method is a double it needs to return something. You could return 0 or -1 to indicate an error. RJG
         
             }
+            //TODO: Because this method is a double it needs to return something. You could return 0 or -1 to indicate an error. RJG
         }
         static double Pressure(double mass, double vol, double temp, double molecularWeight)
         //  Given mass, volume, temperature and molecular weight returns pressure of a gas in pascals.
@@ -205,12 +189,10 @@ namespace CChavezP1
 
                 //Use GetMolecularWeightFromName method to get the molecular weight of the gas
                 //selected by the user.
-                //GetMolecularWeightFromName(gasName, gasNames, molecularWeights, out countGases);
+                GetMolecularWeightFromName(gasName, gasNames, molecularWeights, countGases);
                 //If the gas is not found display an error message, and drop out to the do another loop.
                 //Ask the user for the volume of gas in cubic meters, mass of the gas in grams and temperature in celcius.
-                Console.WriteLine($"\nWhat volume of {gasName} in cubic meters are you calulating?\n");
-                //DONE: You need to tell the user what units you are expecting. RJG
-
+                Console.WriteLine($"What volume of gas are you calulating?\n");
                 string volBuffer = Console.ReadLine();
                 vol = double.Parse(volBuffer);
                 //Use the Pressure method to get the pressure of the gas in Pascals.
