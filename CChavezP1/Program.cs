@@ -98,21 +98,19 @@ namespace CChavezP1
         //"countGases" is the count of elements in gasNames and molecularWeights arrays.
         {
             countGases = 0;
-            for (int i = 0; i < countGases; i++)
+            for (int i = 0; i < gasNames.Length; i++)
             {
 
                 if (gasNames[i] == gasName)
                 {
+                    Console.WriteLine(molecularWeights[i]);
                     return molecularWeights[i];
                 }
-                else
-                {
-                    Console.WriteLine($"The gas you entered was not on the list.");
-                    return 0;
-                }
-                //TODO: Because this method is a double it needs to return something. You could return 0 or -1 to indicate an error. RJG
 
             }
+            //TODO: Because this method is a double it needs to return something. You could return 0 or -1 to indicate an error. RJG
+
+            return 0;
         }
         static double Pressure(double mass, double vol, double temp, double molecularWeight)
         //  Given mass, volume, temperature and molecular weight returns pressure of a gas in pascals.
@@ -153,9 +151,10 @@ namespace CChavezP1
         //This function will call PaToPsi to convert the pressure passed to it in Pascals to PSI.
         //It should display pressure in both Pascals and PSI.
         {
-            Console.WriteLine($"The pressure in pascals is: ", pressure, "\n");
+
+            Console.Write($"The pressure in pascals is: {pressure}\n");
             double psiPressure = PaToPSI(pressure);
-            Console.WriteLine($"The pressure in PSI is: ", psiPressure, "\n");
+            Console.WriteLine($"The pressure in PSI is: {psiPressure}\n");
         }
 
         static double PaToPSI(double pascals)
@@ -190,9 +189,9 @@ namespace CChavezP1
             double temp = 0;
             double molecularWeight = 0;
             string gasName = "";
-            //Call DisplayHeader to show the program header.
+            //  Call DisplayHeader to show the program header.
             DisplayHeader();
-            //Call GetMolecularWeights to fill the arrays and get the count of items in the list.
+            //  Call GetMolecularWeights to fill the arrays and get the count of items in the list.
             GetMolecularWeights(ref gasNames, ref molecularWeights, out count); //  DONE: countGasses should be an out or ref variable. RJG
             //Call DisplayGasNames to display the gas names to the user in three columns.
             DisplayGasNames(gasNames, countGases);
@@ -200,24 +199,38 @@ namespace CChavezP1
             do
             {
                 //  Ask the user the name of the gas.
-                Console.WriteLine($"\nWhich of these gasses would you like to run a calculation on?\n");
+                Console.WriteLine($"\nWhich of the gasses would you like to run a calculation on?\n");
                 gasName = Console.ReadLine();
 
-                //Use GetMolecularWeightFromName method to get the molecular weight of the gas
-                //selected by the user.
-                //GetMolecularWeightFromName(gasName, gasNames, molecularWeights, out countGases);
-                //If the gas is not found display an error message, and drop out to the do another loop.
-                //Ask the user for the volume of gas in cubic meters, mass of the gas in grams and temperature in celcius.
-                Console.WriteLine($"\nWhat volume of {gasName} in cubic meters are you calulating?\n");
-                //DONE: You need to tell the user what units you are expecting. RJG
+                //  Use GetMolecularWeightFromName method to get the molecular weight of the gas
+                //  selected by the user.
+                molecularWeight = GetMolecularWeightFromName(gasName, gasNames, molecularWeights, out countGases);
+                if (molecularWeight == 0)
+                {
+                    Console.WriteLine("You did not select a gas on the list.");
+                }
+                else
+                {
+                    //  If the gas is not found display an error message, and drop out to the do another loop.
+                    //  Ask the user for the volume of gas in cubic meters, mass of the gas in grams and temperature in celcius.
+                    string inputBuffer;
+                    Console.WriteLine($"\nWhat is the volume of {gasName} in cubic meters?\n");
+                    inputBuffer = Console.ReadLine();
+                    vol = double.Parse(inputBuffer);
+                    Console.WriteLine($"\nWhat is the mass of {gasName} in grams?\n");
+                    inputBuffer = Console.ReadLine();
+                    mass = double.Parse(inputBuffer);
+                    Console.WriteLine($"\nWhat is the tempeture of the {gasName} in celcius?\n");
+                    string volBuffer = Console.ReadLine();
+                    temp = double.Parse(inputBuffer);
 
-                string volBuffer = Console.ReadLine();
-                vol = double.Parse(volBuffer);
-                //Use the Pressure method to get the pressure of the gas in Pascals.
-                double pressure = Pressure(mass, vol, temp, molecularWeight);
-                //Pass the pressure in pascals to the DisplayPressure method to display the pressure in Pascals and PSI.
-                DisplayPresure(pressure);
-                //Ask the user if they want to do another.
+                    //Use the Pressure method to get the pressure of the gas in Pascals.
+                    double pressure = Pressure(mass, vol, temp, molecularWeight);
+                    //Pass the pressure in pascals to the DisplayPressure method to display the pressure in Pascals and PSI.
+                    DisplayPresure(pressure);
+                    //Ask the user if they want to do another.
+                }
+
             } while (DoAnother());
 
             //Display a good bye message when they are done.
