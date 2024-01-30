@@ -103,7 +103,6 @@ namespace CChavezP1
 
                 if (gasNames[i] == gasName)
                 {
-                    Console.WriteLine(molecularWeights[i]);
                     return molecularWeights[i];
                 }
 
